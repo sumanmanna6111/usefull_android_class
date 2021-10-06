@@ -16,4 +16,15 @@ public class ResultChecker {
             Log.e("SUMAN", "No Data");
         }
     }
+    
+       public static void setResult(Bundle bundle){
+        //usage ResultChecker.setResult({Pass the Intent data});
+        if (bundle != null) {
+            for (String key : bundle.keySet()) {
+                Log.e("SUMAN", key + " : " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
+            }
+        } else {
+            Log.e("SUMAN", "No Data");
+        }
+    }
 }
