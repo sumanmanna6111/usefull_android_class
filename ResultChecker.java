@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class ResultChecker {
-    static void setResult(Intent data){
+    static void showResult(Intent data){
         //usage ResultChecker.setResult({Pass the Intent data});
         Bundle bundle = data.getExtras();
         if (bundle != null) {
@@ -17,7 +17,7 @@ public class ResultChecker {
         }
     }
     
-       public static void setResult(Bundle bundle){
+       public static void showResult(Bundle bundle){
         //usage ResultChecker.setResult({Pass the Intent data});
         if (bundle != null) {
             for (String key : bundle.keySet()) {
