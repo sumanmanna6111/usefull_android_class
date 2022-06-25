@@ -30,8 +30,16 @@ public interface APIinterface {
     @POST
     Call <List<Post>> getPostsList(@Url String url, @FieldMap Map<String,String> param);
 
-    @GET("https://digitalcatalog.paytm.com/dcat/v1/browseplans/mobile/7166?channel=web&version=2&child_site_id=1&site_id=1&locale=en-in&pageCount=1&itemsPerPage=20&sort_price=asce&pagination=1")
-    Call <ResponseBody> getResponse(@Query("operator") String operator, @Query("circle") String circle);
+    @FormUrlEncoded
+    @POST
+    Call<ResponseBody> postResponse(@Url String url, @FieldMap Map<String,String> param);//for string response
+
+    @GET
+    Call<ResponseBody> getResponse(@Url String url, @QueryMap Map<String,String> param);//for string response
+    
+    /* 
+    @GET("")
+    Call<String> listRepos( );// use string when converter is scaler */
 
   
 }
