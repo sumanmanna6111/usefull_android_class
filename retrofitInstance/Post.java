@@ -13,8 +13,6 @@ public class Post {
     private List<ResultData> result;
     @SerializedName("msg")
     private String message;
-    @SerializedName("balance")
-    private String balance;
     public int getStatus() {
         return status;
     }
@@ -24,14 +22,6 @@ public class Post {
     public String getMessage() {
         return message;
     }
-    @SerializedName("version")
-    private ResultData version;
-    public ResultData getVersion() {
-        return version;
-    }
 
-    public String getBalance() {
-        return balance;
-    }
 
 }
