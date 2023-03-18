@@ -171,3 +171,21 @@ public class JSONParser {
 
 	}
 }
+
+
+/*
+Map<String, String> params = new HashMap<>();
+params.put(TAG_USERNAME, username.getText().toString());
+params.put(TAG_PASSWORD, password.getText().toString());
+params.put(DEVICE_ID, imei);
+
+//getting JSON string from URL
+JSONObject json = jsonParser.makeHttpRequest(url, "POST", params);
+
+// Check your log cat for JSON reponse
+// Log.d("All jsonarray: ", json.toString());
+
+// Checking for SUCCESS TAG
+Int success = json.getInt(TAG_SUCCESS);
+
+*/
