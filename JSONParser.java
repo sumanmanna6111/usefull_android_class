@@ -1,4 +1,4 @@
-package com.player.battle.world.tournaments;
+package com.example.application;
 
 import android.app.AlertDialog;
 import android.content.ClipData;
