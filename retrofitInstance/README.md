@@ -1,3 +1,4 @@
+```java
         JSONObject jsonData = new JSONObject();
         try {
             jsonData.put("key", "value");
@@ -15,10 +16,11 @@
             public void onFailure(String error) {
             }
          }
-
+```
 
 //in kotlin
 
+```kotlin
  val mediaType: MediaType = "application/json".toMediaTypeOrNull()!!
             val body: RequestBody = RequestBody.create(mediaType, jsonObject.toString())
  RetrofitClient().getRetrofitInstance()?.create(ApiInterface::class.java)?.
@@ -35,3 +37,4 @@
 
                 }
             } )
+```
