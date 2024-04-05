@@ -21,20 +21,24 @@
 //in kotlin
 
 ```kotlin
- val mediaType: MediaType = "application/json".toMediaTypeOrNull()!!
-            val body: RequestBody = RequestBody.create(mediaType, jsonObject.toString())
- RetrofitClient().getRetrofitInstance()?.create(ApiInterface::class.java)?.
-            test(API.login, body)?.
-            enqueue(object : retrofit2.Callback<ResponseBody> {
+        val params = HashMap<String, String>()
+        params["phone"] = phone
+        params["password"] = password
+        RetrofitClient.getInstance().create(APIInterface::class.java).login(params)
+            .enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
-                    response: retrofit2.Response<ResponseBody>
+                    response: Response<ResponseBody>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()?.string()}")
+                    if (response.body() != null) {
+                        loginLiveData.postValue(response.body()?.string())
+                    }
                 }
 
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
+                    loginLiveData.postValue(API.NO_INTERNET)
+                    Log.d("TAG", "onFailure: ")
                 }
-            } )
+
+            })
 ```
