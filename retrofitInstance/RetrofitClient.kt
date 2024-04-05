@@ -5,32 +5,31 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class RetrofitClient {
-    private var retrofit: Retrofit? = null
+object RetrofitClient {
 
-    fun getRetrofitInstance(): Retrofit?{
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .build()
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(API.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .client(okHttpClient)
+    private var INSTANCE: Retrofit? = null
+
+    fun getInstance(): Retrofit {
+        if (INSTANCE == null) {
+            val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val gson = GsonBuilder().setLenient().create()
+            val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .build()
+
+            synchronized(this) {
+                INSTANCE = Retrofit.Builder()
+                    .baseUrl(API.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .client(okHttpClient)
+                    .build()
+            }
         }
-        return retrofit
+        return INSTANCE!!
     }
 }
